@@ -1,0 +1,163 @@
+/* Estilo do corpo da página: sem margens, sem barras de rolagem e fundo escuro */
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+/* Container onde o Three.js renderiza a cena, ocupando 100% da viewport */
+#viewer-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* =================== Estilo do Dock Inferior (estilo macOS) =================== */
+.mac-dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 10px 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 25px;
+  z-index: 2000;
+  transition: all 0.3s ease;
+}
+
+/* Ícones do dock inferior */
+.mac-dock-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  transform-origin: bottom center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Efeito de hover para os ícones do dock inferior */
+.mac-dock-icon:hover {
+  transform: translateY(-10px) scale(1.15);
+}
+
+/* Estilo dos ícones (utilizando Font Awesome) */
+.mac-dock-icon i {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+/* =================== Estilo do Dock Lateral Direito =================== */
+.dock {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Ícones do dock lateral */
+.dock-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Efeito de hover para os ícones do dock lateral */
+.dock-icon:hover {
+  transform: scale(1.15);
+}
+
+/* Ícones do dock lateral (Font Awesome) */
+.dock-icon i {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* =================== Estilo do Painel de Controle =================== */
+.control-panel {
+  position: fixed;
+  left: 20px;
+  bottom: 80px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+/* Classe para esconder o painel (aplicando translação e opacidade zero) */
+.hidden {
+  transform: translateX(-150%);
+  opacity: 0;
+}
+
+/* Estilos para o tema claro */
+.light-mode {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Ajusta os painéis e docks no modo claro */
+.light-mode .mac-dock,
+.light-mode .dock,
+.light-mode .control-panel {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Ícones escuros no modo claro */
+.light-mode .mac-dock-icon i,
+.light-mode .dock-icon i {
+  color: #000;
+}
+
+/* Ajustes responsivos para telas com altura menor */
+@media (max-height: 600px) {
+  .control-panel {
+    bottom: 20px;
+    width: 250px;
+  }
+}
+
+.control-group h5 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.control-panel hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 15px 0;
+}

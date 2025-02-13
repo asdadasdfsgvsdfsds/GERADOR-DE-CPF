@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIZUALIZADOR 3D</title>
+
+  <!-- Inclusão do Bootstrap e Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Link para o CSS customizado -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Container onde a cena 3D será renderizada -->
+  <div id="viewer-container"></div>
+
+  <!-- =================== Dock Lateral Direito =================== -->
+  <div class="dock">
+    <!-- Botão para alternar visibilidade do painel de controle -->
+    <div class="dock-icon" onclick="toggleControlPanel()">
+      <i class="fas fa-eye-slash" id="toggleIcon"></i>
+    </div>
+    <!-- Botão para alternar entre modo claro e escuro -->
+    <div class="mac-dock-icon" onclick="toggleTheme()">
+      <i class="fas fa-moon" id="themeIcon"></i>
+    </div>
+    <!-- Botão para mesclar os objetos existentes -->
+    <div class="dock-icon" onclick="mergeCubes()">
+      <i class="fas fa-object-group"></i>
+    </div>
+    <!-- Botão para alternar a grade -->
+    <div class="dock-icon" onclick="toggleGrid()">
+      <i class="fas fa-border-all"></i>
+    </div>
+  </div>
+
+  <!-- =================== Dock Inferior (estilo macOS) =================== -->
+  <div class="mac-dock">
+    <!-- Botão para acionar o input de arquivo para modelos 3D -->
+    <div class="mac-dock-icon" onclick="document.getElementById('file-input').click()">
+      <i class="fas fa-file-import"></i>
+    </div>
+    <!-- Botão para dar zoom (aumentar) na cena -->
+    <div class="mac-dock-icon" onclick="handleZoom('in')">
+      <i class="fas fa-search-plus"></i>
+    </div>
+    <!-- Botão para dar zoom (diminuir) na cena -->
+    <div class="mac-dock-icon" onclick="handleZoom('out')">
+      <i class="fas fa-search-minus"></i>
+    </div>
+    <!-- Botão para aplicar textura -->
+    <div class="mac-dock-icon" onclick="document.getElementById('texture-input').click()">
+      <i class="fas fa-image"></i>
+    </div>
+  </div>
+
+  <!-- Inputs ocultos para arquivo de modelo e textura -->
+  <input type="file" id="file-input" accept=".gltf,.glb,.fbx,.obj" style="display: none;" multiple>
+  <input type="file" id="texture-input" accept="image/*" style="display: none;">
+
+  <!-- =================== Painel de Controle =================== -->
+  <div class="control-panel" id="controlPanel">
+    <!-- Seção de Posição -->
+    <div class="control-group">
+      <h5>🔄 Posicionamento</h5>
+      <label>
+        Posição X (Esquerda/Direita):
+        <input type="range" id="posX" min="-10" max="10" step="0.1" oninput="updateCubePosition()">
+      </label>
+      <label>
+        Posição Y (Cima/Baixo):
+        <input type="range" id="posY" min="-10" max="10" step="0.1" oninput="updateCubePosition()">
+      </label>
+      <label>
+        Posição Z (Frente/Trás):
+        <input type="range" id="posZ" min="-10" max="10" step="0.1" oninput="updateCubePosition()">
+      </label>
+    </div>
+
+    <hr>
+
+    <!-- Seção de Escala -->
+    <div class="control-group">
+      <h5>📏 Escala (Esticar/Encolher)</h5>
+      <label>
+        Escala X (Largura):
+        <input type="range" id="scaleX" min="0.1" max="3" step="0.1" value="1" oninput="updateCubeScale()">
+      </label>
+      <label>
+        Escala Y (Altura):
+        <input type="range" id="scaleY" min="0.1" max="3" step="0.1" value="1" oninput="updateCubeScale()">
+      </label>
+      <label>
+        Escala Z (Profundidade):
+        <input type="range" id="scaleZ" min="0.1" max="3" step="0.1" value="1" oninput="updateCubeScale()">
+      </label>
+    </div>
+
+    <hr>
+
+    <!-- Seção de Cor -->
+    <div class="control-group">
+      <h5>🎨 Cor do Objeto</h5>
+      <label>
+        Escolha a Cor:
+        <input type="color" id="cubeColor" oninput="updateCubeColor()">
+      </label>
+    </div>
+  </div>
+
+  <!-- Inclusão das bibliotecas Three.js e dependências -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+  <!-- Script customizado -->
+  <script src="script.js"></script>
+</body>
+</html>
